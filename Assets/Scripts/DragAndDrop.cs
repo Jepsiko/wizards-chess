@@ -33,7 +33,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        if (eventData.pointerEnter is null)
+        if (eventData.pointerEnter == null)
         {
             rectTransform.anchoredPosition = previousPosition;
         }
