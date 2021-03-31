@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1999620896792706784, guid: 849f6fe817e35354b90abe08308a4fed,
+        type: 3}
+      propertyPath: isWhite
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5538350890846164868, guid: 849f6fe817e35354b90abe08308a4fed,
         type: 3}
       propertyPath: m_Sprite
@@ -121,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 5538350890846164873, guid: 849f6fe817e35354b90abe08308a4fed,
         type: 3}
       propertyPath: m_Name
-      value: Piece
+      value: BlackQueen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 849f6fe817e35354b90abe08308a4fed, type: 3}

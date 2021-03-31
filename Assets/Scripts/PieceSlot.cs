@@ -10,8 +10,14 @@ public class PieceSlot : MonoBehaviour, IDropHandler
         GameObject piece = eventData.pointerDrag;
         if (piece != null)
         {
-            piece.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            piece.GetComponent<Piece>().position = name;
+            List<string> possibleMoves = piece.GetComponent<IMovable>().GetPossibleMoves();
+            if (possibleMoves.Contains(name))
+            {
+                piece.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                piece.GetComponent<Piece>().position = name;
+            }
+            else
+                piece.GetComponent<DragAndDrop>().ResetPosition();
         }
     }
 }

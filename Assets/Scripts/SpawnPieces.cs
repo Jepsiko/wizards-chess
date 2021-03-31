@@ -56,11 +56,12 @@ public class SpawnPieces : MonoBehaviour
         GameObject piece = GetPieceFromType(type, isWhite);
         GameObject createdPiece = Instantiate(piece, transform);
 
-        piece.GetComponent<DragAndDrop>().canvas = transform.parent.GetComponent<Canvas>();
+        createdPiece.GetComponent<DragAndDrop>().canvas = transform.parent.GetComponent<Canvas>();
 
         Transform square = board.transform.Find(BoardNotation.SquareNameFromCoordinate(file, rank, isWhiteDown));
         createdPiece.GetComponent<RectTransform>().anchoredPosition =
             square.GetComponent<RectTransform>().anchoredPosition;
+        createdPiece.GetComponent<Piece>().position = square.name;
     }
 
     GameObject GetPieceFromType(Piece.PieceType type, bool isWhite)

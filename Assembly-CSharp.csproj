@@ -61,6 +61,8 @@
      <Compile Include="Assets\Scripts\BoardNotation.cs" />
      <Compile Include="Assets\Scripts\DragAndDrop.cs" />
      <Compile Include="Assets\Scripts\DrawBoard.cs" />
+     <Compile Include="Assets\Scripts\IMovable.cs" />
+     <Compile Include="Assets\Scripts\PawnMovements.cs" />
      <Compile Include="Assets\Scripts\Piece.cs" />
      <Compile Include="Assets\Scripts\PieceSlot.cs" />
      <Compile Include="Assets\Scripts\SpawnPieces.cs" />

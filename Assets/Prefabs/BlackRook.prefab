@@ -121,7 +121,12 @@ PrefabInstance:
     - target: {fileID: 2118861474517305404, guid: eed5ee74aaaa00e4c8f0c96ea875f27f,
         type: 3}
       propertyPath: m_Name
-      value: Piece
+      value: BlackRook
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367038541605970261, guid: eed5ee74aaaa00e4c8f0c96ea875f27f,
+        type: 3}
+      propertyPath: isWhite
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed5ee74aaaa00e4c8f0c96ea875f27f, type: 3}

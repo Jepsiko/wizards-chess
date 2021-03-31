@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3614379716582220636, guid: 28aea2a8a763a6e479d4fcc19e2f580a,
+        type: 3}
+      propertyPath: isWhite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1930668316920198592, guid: 28aea2a8a763a6e479d4fcc19e2f580a,
         type: 3}
       propertyPath: m_Sprite
@@ -121,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 1930668316920198605, guid: 28aea2a8a763a6e479d4fcc19e2f580a,
         type: 3}
       propertyPath: m_Name
-      value: Piece
+      value: WhiteRook
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28aea2a8a763a6e479d4fcc19e2f580a, type: 3}

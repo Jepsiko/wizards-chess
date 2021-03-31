@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1219817080231917974, guid: de23911bcbfe8cd438253be5fdef0c8b,
+        type: 3}
+      propertyPath: isWhite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5184084612853338352, guid: de23911bcbfe8cd438253be5fdef0c8b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -112,6 +117,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5184084612853338353, guid: de23911bcbfe8cd438253be5fdef0c8b,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5184084612853338354, guid: de23911bcbfe8cd438253be5fdef0c8b,
         type: 3}
       propertyPath: m_Sprite
@@ -121,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 5184084612853338367, guid: de23911bcbfe8cd438253be5fdef0c8b,
         type: 3}
       propertyPath: m_Name
-      value: Piece
+      value: WhiteBishop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de23911bcbfe8cd438253be5fdef0c8b, type: 3}

@@ -7,10 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4243653558343567855, guid: ad9921b581a724644b6f51b17ca8b027,
+        type: 3}
+      propertyPath: isWhite
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7924158567412162694, guid: ad9921b581a724644b6f51b17ca8b027,
         type: 3}
       propertyPath: m_Name
-      value: Piece
+      value: BlackPawn
       objectReference: {fileID: 0}
     - target: {fileID: 7924158567412162697, guid: ad9921b581a724644b6f51b17ca8b027,
         type: 3}

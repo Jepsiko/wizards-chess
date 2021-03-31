@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &6964326457362951149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200115239214365237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d81e3024b2b672489b50194b2078eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &733563526752190416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7,10 +19,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4528913526200003724, guid: 4fede0a74f2851646845822430e67434,
+        type: 3}
+      propertyPath: isWhite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7621733848140776933, guid: 4fede0a74f2851646845822430e67434,
         type: 3}
       propertyPath: m_Name
-      value: Piece
+      value: WhitePawn
       objectReference: {fileID: 0}
     - target: {fileID: 7621733848140776936, guid: 4fede0a74f2851646845822430e67434,
         type: 3}
@@ -123,5 +140,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7621733848140776939, guid: 4fede0a74f2851646845822430e67434,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fede0a74f2851646845822430e67434, type: 3}
+--- !u!1 &7200115239214365237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7621733848140776933, guid: 4fede0a74f2851646845822430e67434,
+    type: 3}
+  m_PrefabInstance: {fileID: 733563526752190416}
+  m_PrefabAsset: {fileID: 0}
