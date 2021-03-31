@@ -10,8 +10,6 @@ public class DrawBoard : MonoBehaviour
     public Color blackColor;
     public int size;
 
-    public bool isWhiteDown;
-
     private Image[][] squares;
 
     private void Awake()
@@ -23,7 +21,7 @@ public class DrawBoard : MonoBehaviour
             for (int rank = 0; rank < 8; rank++)
             {
                 GameObject square = CreateSquare(file, rank);
-                square.name = BoardNotation.SquareNameFromCoordinate(file, rank, isWhiteDown);
+                square.name = BoardNotation.SquareNameFromCoordinate(file, rank, GameController.Instance.isWhiteDown);
                 squares[file][rank] = square.GetComponent<Image>();
             }
         }

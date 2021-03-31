@@ -10,24 +10,34 @@ public class PawnMovements : MonoBehaviour, IMovable
         bool isWhite = GetComponent<Piece>().isWhite;
 
         string position = GetComponent<Piece>().position;
-        int[] coord = BoardNotation.CoordinateFromSquareName(position, true);
+        bool isWhiteDown = GameController.Instance.isWhiteDown;
+        
+        int[] coord = BoardNotation.CoordinateFromSquareName(position, isWhiteDown);
         int file = coord[0];
         int rank = coord[1];
 
-        if (isWhite)
+        if (isWhite == isWhiteDown)
         {
-            possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank+1, true));
+            possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank+1, isWhiteDown));
             if (rank == 1)
-                possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank+2, true));
+                possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank+2, isWhiteDown));
         }
         else
         {
-            possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank-1, true));
+            possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank-1, isWhiteDown));
             if (rank == 6)
-                possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank-2, true));
+                possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank-2, isWhiteDown));
         }
 
-        possibleMoves.ForEach(print);
         return possibleMoves;
+    }
+
+    public List<string> GetLegalMoves()
+    {
+        List<string> legalMoves = GetPossibleMoves();
+        
+        
+        
+        return legalMoves;
     }
 }

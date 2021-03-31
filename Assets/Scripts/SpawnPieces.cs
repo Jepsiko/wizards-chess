@@ -12,7 +12,7 @@ public class SpawnPieces : MonoBehaviour
 
     void Start()
     {
-        isWhiteDown = board.GetComponent<DrawBoard>().isWhiteDown;
+        isWhiteDown = GameController.Instance.isWhiteDown;
         
         CreateStandardBoard();
     }
