@@ -7,9 +7,11 @@ public class PieceSlot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        GameObject piece = eventData.pointerDrag;
+        if (piece != null)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            piece.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            piece.GetComponent<Piece>().position = name;
         }
     }
 }
