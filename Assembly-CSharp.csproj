@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\DrawBoard.cs" />
      <Compile Include="Assets\Scripts\Piece.cs" />
      <Compile Include="Assets\Scripts\PieceSlot.cs" />
+     <Compile Include="Assets\Scripts\SpawnPieces.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Unity Projects/Wizard&apos;s Chess/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

@@ -14,7 +14,7 @@ public class DrawBoard : MonoBehaviour
 
     private Image[][] squares;
 
-    private void Start()
+    private void Awake()
     {
         squares = new Image[8][];
         for (int file = 0; file < 8; file++)
