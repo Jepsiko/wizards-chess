@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\IMovable.cs" />
      <Compile Include="Assets\Scripts\PawnMovements.cs" />
      <Compile Include="Assets\Scripts\Piece.cs" />
+     <Compile Include="Assets\Scripts\RookMovements.cs" />
      <Compile Include="Assets\Scripts\SpawnPieces.cs" />
      <Compile Include="Assets\Scripts\Square.cs" />
  <Reference Include="Unity.Timeline.Editor">

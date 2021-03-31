@@ -21,8 +21,14 @@ public class Piece : MonoBehaviour
 
     public void MoveToPosition(string newPosition)
     {
+        if (newPosition == position)
+        {
+            GetComponent<DragAndDrop>().ResetPosition();
+            return;
+        }
+        
         List<string> legalMoves = GetComponent<IMovable>().GetLegalMoves();
-        if (newPosition != position && legalMoves.Contains(newPosition))
+        if (legalMoves.Contains(newPosition))
         {
             Square square = (Square) GameController.Instance.squares[newPosition];
             GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;

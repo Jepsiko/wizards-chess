@@ -21,4 +21,20 @@ public class GameController : MonoBehaviour
             Debug.LogError("Multiple instance of GameController, ignoring this one", this);
         }
     }
+    
+    public bool IsOccupied(string position)
+    {
+        bool isOccupied = false;
+
+        foreach (Piece piece in pieces)
+        {
+            if (piece.position == position)
+            {
+                isOccupied = true;
+                break;
+            }
+        }
+
+        return isOccupied;
+    }
 }

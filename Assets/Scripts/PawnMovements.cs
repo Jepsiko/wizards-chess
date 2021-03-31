@@ -39,26 +39,10 @@ public class PawnMovements : MonoBehaviour, IMovable
 
         foreach (string possibleMove in possibleMoves)
         {
-            if (!IsOccupied(possibleMove))
+            if (!GameController.Instance.IsOccupied(possibleMove))
                 legalMoves.Add(possibleMove);
         }
         
         return legalMoves;
-    }
-
-    private bool IsOccupied(string position)
-    {
-        bool isOccupied = false;
-
-        foreach (Piece piece in GameController.Instance.pieces)
-        {
-            if (piece.position == position)
-            {
-                isOccupied = true;
-                break;
-            }
-        }
-
-        return isOccupied;
     }
 }
