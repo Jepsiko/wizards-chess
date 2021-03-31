@@ -13,7 +13,12 @@ public class SpawnPieces : MonoBehaviour
     void Start()
     {
         isWhiteDown = board.GetComponent<DrawBoard>().isWhiteDown;
+        
+        CreateStandardBoard();
+    }
 
+    void CreateStandardBoard()
+    {
         // Spawn Pawns
         for (int file = 0; file < 8; file++)
         {
