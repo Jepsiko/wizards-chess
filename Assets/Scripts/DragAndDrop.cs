@@ -27,6 +27,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
         previousPosition = rectTransform.anchoredPosition;
+        transform.SetSiblingIndex(-1);
+        GetComponent<HighlightSquares>().HighlightLegalSquares();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -35,6 +37,18 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.blocksRaycasts = true;
         if (eventData.pointerEnter == null)
             ResetPosition();
+        else
+        {
+            string targetPosition;
+            if (eventData.pointerEnter.GetComponent<Piece>() != null)
+                targetPosition = eventData.pointerEnter.GetComponent<Piece>().position;
+            else
+                targetPosition = eventData.pointerEnter.name;
+
+            GetComponent<Piece>().MoveToPosition(targetPosition);
+        }
+        
+        GetComponent<HighlightSquares>().UnhighlightLegalSquares();
     }
 
     public void OnDrag(PointerEventData eventData)

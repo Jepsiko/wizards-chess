@@ -6,35 +6,31 @@ using UnityEngine.UI;
 
 public class DrawBoard : MonoBehaviour
 {
-    public Color whiteColor;
-    public Color blackColor;
     public int size;
-
-    private Image[][] squares;
 
     private void Awake()
     {
-        squares = new Image[8][];
         for (int file = 0; file < 8; file++)
         {
-            squares[file] = new Image[8];
             for (int rank = 0; rank < 8; rank++)
             {
                 GameObject square = CreateSquare(file, rank);
-                square.name = BoardNotation.SquareNameFromCoordinate(file, rank, GameController.Instance.isWhiteDown);
-                squares[file][rank] = square.GetComponent<Image>();
+                square.name = BoardNotation.SquareNameFromCoordinate(file, rank);
+                square.AddComponent<Square>().position = square.name;
+                GameController.Instance.squares.Add(square.name, square.GetComponent<Square>());
             }
         }
     }
 
     private void Update()
     {
-        for (int file = 0; file < 8; file++)
+        foreach (DictionaryEntry squareEntry in GameController.Instance.squares)
         {
-            for (int rank = 0; rank < 8; rank++)
-            {
-                squares[file][rank].color = GetSquareColor(file, rank);
-            }
+            Square square = (Square) squareEntry.Value;
+            if (square.isLegal)
+                square.ChangeColor(GetLegalSquareColor(square.position));
+            else
+                square.ChangeColor(GetSquareColor(square.position));
         }
     }
 
@@ -51,7 +47,6 @@ public class DrawBoard : MonoBehaviour
         Image squareImage = square.AddComponent<Image>();
         squareImage.color = GetSquareColor(file, rank);
 
-        square.AddComponent<PieceSlot>();
         return square;
     }
 
@@ -60,8 +55,29 @@ public class DrawBoard : MonoBehaviour
         return new Vector3((-3.50f + file)*size, (-3.50f + rank)*size);
     }
 
+    private Color GetSquareColor(string position)
+    {
+        int[] coord = BoardNotation.CoordinateFromSquareName(position);
+        int file = coord[0];
+        int rank = coord[1];
+        return GetSquareColor(file, rank);
+    }
+
     private Color GetSquareColor(int file, int rank)
     {
-        return (file + rank) % 2 == 0 ? blackColor : whiteColor;
+        return (file + rank) % 2 == 0 ? GameSettings.Instance.blackColor : GameSettings.Instance.whiteColor;
+    }
+
+    private Color GetLegalSquareColor(string position)
+    {
+        int[] coord = BoardNotation.CoordinateFromSquareName(position);
+        int file = coord[0];
+        int rank = coord[1];
+        return GetLegalSquareColor(file, rank);
+    }
+
+    private Color GetLegalSquareColor(int file, int rank)
+    {
+        return (file + rank) % 2 == 0 ? GameSettings.Instance.blackLegalMoveColor : GameSettings.Instance.whiteLegalMoveColor;
     }
 }

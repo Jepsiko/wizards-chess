@@ -62,11 +62,13 @@
      <Compile Include="Assets\Scripts\DragAndDrop.cs" />
      <Compile Include="Assets\Scripts\DrawBoard.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameSettings.cs" />
+     <Compile Include="Assets\Scripts\HighlightSquares.cs" />
      <Compile Include="Assets\Scripts\IMovable.cs" />
      <Compile Include="Assets\Scripts\PawnMovements.cs" />
      <Compile Include="Assets\Scripts\Piece.cs" />
-     <Compile Include="Assets\Scripts\PieceSlot.cs" />
      <Compile Include="Assets\Scripts\SpawnPieces.cs" />
+     <Compile Include="Assets\Scripts\Square.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Unity Projects/Wizard&apos;s Chess/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
