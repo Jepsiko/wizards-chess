@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
     
     public bool isWhiteDown;
+    
+    [HideInInspector]
     public List<Piece> pieces = new List<Piece>();
     public Dictionary<string, Square> squares = new Dictionary<string, Square>();
     

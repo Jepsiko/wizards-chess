@@ -47,8 +47,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 targetPosition = eventData.pointerEnter.GetComponent<Piece>().Position;
             else
             {
-                print("EndDrag on square");
-                print(eventData.pointerEnter.name);
                 targetPosition = Position.GetPositionAt(eventData.pointerEnter.name);
             }
 

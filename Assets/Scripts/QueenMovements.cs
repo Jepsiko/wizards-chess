@@ -17,7 +17,5 @@ public class QueenMovements : Movable
         AddAlongLine(-1, +1);
         AddAlongLine(+1, -1);
         AddAlongLine(+1, +1);
-        
-        PossibleMoves.ForEach(print);
     }
 }
