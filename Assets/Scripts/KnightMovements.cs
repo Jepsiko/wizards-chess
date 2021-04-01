@@ -2,17 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightMovements : MonoBehaviour
+public class KnightMovements : MonoBehaviour, IMovable
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<string> GetPossibleMoves()
     {
-        
+        List<string> possibleMoves = new List<string>();
+
+        string position = GetComponent<Piece>().position;
+
+        for (int i = -2; i <= 2; i++)
+            for (int j = -2; j <= 2; j++)
+                if (i != 0 && j != 0 && i != j && i != -j)
+                {
+                    Debug.Log("i : " + i + ", j :" + j);
+                    string nextPosition = BoardNotation.MoveFileAndRank(position, i, j);
+                    if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition)) 
+                        possibleMoves.Add(nextPosition);
+                }
+
+        return possibleMoves;
     }
 
-    // Update is called once per frame
-    void Update()
+    public List<string> GetLegalMoves()
     {
+        List<string> possibleMoves = GetPossibleMoves();
+        List<string> legalMoves = new List<string>();
+
+        foreach (string possibleMove in possibleMoves)
+        {
+            if (!GameController.Instance.IsOccupied(possibleMove))
+                legalMoves.Add(possibleMove);
+        }
         
+        return legalMoves;
     }
 }
