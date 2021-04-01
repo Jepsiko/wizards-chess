@@ -44,8 +44,7 @@ public class DrawBoard : MonoBehaviour
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
         rectTransform.anchoredPosition = GetPosition(file, rank);
 
-        Image squareImage = square.AddComponent<Image>();
-        squareImage.color = GetSquareColor(file, rank);
+        square.AddComponent<Image>();
 
         return square;
     }

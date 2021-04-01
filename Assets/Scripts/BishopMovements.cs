@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RookMovements : MonoBehaviour, IMovable
+public class BishopMovements : MonoBehaviour, IMovable
 {
     public List<string> GetPossibleMoves()
     {
@@ -10,10 +10,10 @@ public class RookMovements : MonoBehaviour, IMovable
 
         string position = GetComponent<Piece>().position;
 
-        AddAlongLine(possibleMoves, position, -1, 0);
-        AddAlongLine(possibleMoves, position, 0, -1);
-        AddAlongLine(possibleMoves, position, +1, 0);
-        AddAlongLine(possibleMoves, position, 0, +1);
+        AddAlongLine(possibleMoves, position, -1, -1);
+        AddAlongLine(possibleMoves, position, -1, +1);
+        AddAlongLine(possibleMoves, position, +1, -1);
+        AddAlongLine(possibleMoves, position, +1, +1);
 
         return possibleMoves;
     }

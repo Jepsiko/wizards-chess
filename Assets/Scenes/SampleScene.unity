@@ -252,10 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c2051f3ae4aeb4490b18c07c5212f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
-  blackColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   size: 60
-  isWhiteDown: 1
 --- !u!1 &799932741
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,10 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c2051f3ae4aeb4490b18c07c5212f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-  blackColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
   size: 0
-  isWhiteDown: 0
 --- !u!4 &1120130027
 Transform:
   m_ObjectHideFlags: 0
@@ -369,6 +363,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1473690725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473690727}
+  - component: {fileID: 1473690726}
+  - component: {fileID: 1473690728}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1473690726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473690725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1090e8d5efdee874da7bc62bbc9498b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhiteDown: 1
+  pieces: []
+--- !u!4 &1473690727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473690725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 520.05054, y: 329.9324, z: -315.486}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473690728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473690725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04366bf9ebb730f439b78317bae04afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  blackColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
+  whiteLegalMoveColor: {r: 1, g: 0.3537736, b: 0.3537736, a: 1}
+  blackLegalMoveColor: {r: 0.5754717, g: 0.10586509, b: 0.10586509, a: 1}
 --- !u!1 &1856756722
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,14 +475,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 561108053}
   pieces:
-  - {fileID: 7200115239214365237, guid: fa7953081c3bccb498c8d2dfdfb55cb8, type: 3}
-  - {fileID: 7621733848140776933, guid: 4fede0a74f2851646845822430e67434, type: 3}
+  - {fileID: 1536778089719752338, guid: e233df4efa6ab804db9be128b7213a2b, type: 3}
+  - {fileID: 6770393884530911217, guid: 5252b8306b4ff424fad38fefacdb134c, type: 3}
   - {fileID: 5184084612853338367, guid: de23911bcbfe8cd438253be5fdef0c8b, type: 3}
   - {fileID: 8405703833243367124, guid: ffc27864e850234419589fa72add2ed2, type: 3}
   - {fileID: 6425941514761718403, guid: ea260469989afb44e90bed02ac2a188c, type: 3}
   - {fileID: 7924158567412162694, guid: ad9921b581a724644b6f51b17ca8b027, type: 3}
-  - {fileID: 4966940237120066507, guid: 386d8c6e7ec33034d953c81c30087fa7, type: 3}
-  - {fileID: 2926321015619213299, guid: 272bf9963094de54abe0df09ad0a4b4b, type: 3}
+  - {fileID: 961465999887275980, guid: 9ce6fe7d542c22442a54287e2f04c9f0, type: 3}
+  - {fileID: 8466874046774925907, guid: bb054dc31b281044d9f1f3c88e453343, type: 3}
   - {fileID: 5538350890846164873, guid: 849f6fe817e35354b90abe08308a4fed, type: 3}
   - {fileID: 2525031726055803555, guid: 9305a3ad67e9fae489e5f11a2d02a1b4, type: 3}
   - {fileID: 2118861474517305404, guid: eed5ee74aaaa00e4c8f0c96ea875f27f, type: 3}
