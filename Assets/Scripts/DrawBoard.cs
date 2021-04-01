@@ -26,6 +26,8 @@ public class DrawBoard : MonoBehaviour
         {
             if (square.isLegal)
                 square.ChangeColor(GetLegalSquareColor(square.Position));
+            else if (square.isAttacked)
+                square.ChangeColor(GetAttackSquareColor(square.Position));
             else
                 square.ChangeColor(GetSquareColor(square.Position));
         }
@@ -73,5 +75,15 @@ public class DrawBoard : MonoBehaviour
     private Color GetLegalSquareColor(int file, int rank)
     {
         return (file + rank) % 2 == 0 ? GameSettings.Instance.blackLegalMoveColor : GameSettings.Instance.whiteLegalMoveColor;
+    }
+
+    private Color GetAttackSquareColor(Position position)
+    {
+        return GetAttackSquareColor(position.GetFile(), position.GetRank());
+    }
+
+    private Color GetAttackSquareColor(int file, int rank)
+    {
+        return (file + rank) % 2 == 0 ? GameSettings.Instance.blackAttackMoveColor : GameSettings.Instance.whiteAttackMoveColor;
     }
 }

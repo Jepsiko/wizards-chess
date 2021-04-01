@@ -9,6 +9,7 @@ public class Square : MonoBehaviour
     public Position Position;
     public Color color;
     public bool isLegal = false;
+    public bool isAttacked = false;
 
     private Image image;
 

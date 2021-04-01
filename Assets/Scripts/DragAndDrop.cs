@@ -30,7 +30,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         transform.SetSiblingIndex(-1);
         
         GameController.Instance.GenerateMoves(eventData.pointerDrag.GetComponent<Piece>());
-        GetComponent<HighlightSquares>().HighlightLegalSquares();
+        
+        GetComponent<HighlightSquares>().HighlightAllSquares();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -54,7 +55,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             GetComponent<Piece>().MoveToPosition(targetPosition);
         }
         
-        GetComponent<HighlightSquares>().UnhighlightLegalSquares();
+        GetComponent<HighlightSquares>().UnhighlightAllSquares();
     }
 
     public void OnDrag(PointerEventData eventData)

@@ -6,30 +6,62 @@ using UnityEngine.UI;
 
 public class HighlightSquares : MonoBehaviour
 {
-    private List<Square> highlightedSquares;
+    private List<Square> highlightedLegalSquares;
+    private List<Square> highlightedAttackSquares;
 
     private void Start()
     {
-        highlightedSquares = new List<Square>();
+        highlightedLegalSquares = new List<Square>();
+        highlightedAttackSquares = new List<Square>();
+    }
+
+    public void HighlightAllSquares()
+    {
+        HighlightLegalSquares();
+        HighlightAttackSquares();
+    }
+
+    public void UnhighlightAllSquares()
+    {
+        UnhighlightLegalSquares();
+        UnhighlightAttackSquares();
     }
 
     public void HighlightLegalSquares()
     {
-        GetComponent<Movable>().LegalMoves.ForEach(print);
         foreach (Position squarePosition in GetComponent<Movable>().LegalMoves)
         {
             Square square = GameController.Instance.squares[squarePosition.GetNotation()];
             square.isLegal = true;
-            highlightedSquares.Add(square);
+            highlightedLegalSquares.Add(square);
         }
     }
 
     public void UnhighlightLegalSquares()
     {
-        for (int i = highlightedSquares.Count - 1; i >= 0; i--)
+        for (int i = highlightedLegalSquares.Count - 1; i >= 0; i--)
         {
-            highlightedSquares[i].isLegal = false;
-            highlightedSquares.RemoveAt(i);
+            highlightedLegalSquares[i].isLegal = false;
+            highlightedLegalSquares.RemoveAt(i);
+        }
+    }
+
+    public void HighlightAttackSquares()
+    {
+        foreach (Position squarePosition in GetComponent<Movable>().AttackMoves)
+        {
+            Square square = GameController.Instance.squares[squarePosition.GetNotation()];
+            square.isAttacked = true;
+            highlightedAttackSquares.Add(square);
+        }
+    }
+
+    public void UnhighlightAttackSquares()
+    {
+        for (int i = highlightedAttackSquares.Count - 1; i >= 0; i--)
+        {
+            highlightedAttackSquares[i].isAttacked = false;
+            highlightedAttackSquares.RemoveAt(i);
         }
     }
 }

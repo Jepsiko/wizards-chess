@@ -19,30 +19,51 @@ public class Piece : MonoBehaviour
     public PieceType type;
     public bool isWhite;
 
-    public void MoveToPosition(Position newPosition)
+    public void MoveToPosition(Position position)
     {
-        if (newPosition == Position)
+        if (position == Position)
         {
             GetComponent<DragAndDrop>().ResetPosition();
             return;
         }
         
-        if (CanMoveTo(newPosition))
+        if (CanMoveTo(position))
         {
-            Square square = GameController.Instance.squares[newPosition.GetNotation()];
-            Debug.Log("Square " + square.name + ", " + square.Position.GetNotation(), square);
-            GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;
-            Position = newPosition;
+            UpdatePosition(position);
+        }
+        else if (CanAttackAt(position))
+        {
+            Piece other = GameController.Instance.GetPieceAtPosition(position);
+            Destroy(other.gameObject);
+            UpdatePosition(position);
         }
         else
             GetComponent<DragAndDrop>().ResetPosition();
     }
 
-    private bool CanMoveTo(Position newPosition)
+    private void UpdatePosition(Position position)
+    {
+        Square square = GameController.Instance.squares[position.GetNotation()];
+        GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;
+        Position = position;
+    }
+
+    private bool CanMoveTo(Position position)
     {
         foreach (Position legalMove in GetComponent<Movable>().LegalMoves)
         {
-            if (newPosition.Equals(legalMove))
+            if (position.Equals(legalMove))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool CanAttackAt(Position position)
+    {
+        foreach (Position attackMove in GetComponent<Movable>().AttackMoves)
+        {
+            if (position.Equals(attackMove))
                 return true;
         }
 

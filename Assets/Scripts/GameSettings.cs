@@ -10,6 +10,8 @@ public class GameSettings : MonoBehaviour
     public Color blackColor;
     public Color whiteLegalMoveColor;
     public Color blackLegalMoveColor;
+    public Color whiteAttackMoveColor;
+    public Color blackAttackMoveColor;
     
     void Awake()
     {

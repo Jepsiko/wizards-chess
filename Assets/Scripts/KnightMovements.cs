@@ -15,7 +15,7 @@ public class KnightMovements : Movable
                 if (i != 0 && j != 0 && i != j && i != -j)
                 {
                     Position nextPosition = position.GetPositionFromHere(i, j);
-                    if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition)) 
+                    if (nextPosition != null) 
                         PossibleMoves.Add(nextPosition);
                 }
     }
