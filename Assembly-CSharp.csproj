@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\PawnMovements.cs" />
      <Compile Include="Assets\Scripts\Piece.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
+     <Compile Include="Assets\Scripts\Promotable.cs" />
      <Compile Include="Assets\Scripts\QueenMovements.cs" />
      <Compile Include="Assets\Scripts\RookMovements.cs" />
      <Compile Include="Assets\Scripts\SpawnPieces.cs" />

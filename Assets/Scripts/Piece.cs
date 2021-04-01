@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Piece : MonoBehaviour
 {
     public Position Position;
+
+    public UnityEvent onMoved;
 
     public enum PieceType
     {
@@ -46,6 +49,7 @@ public class Piece : MonoBehaviour
         Square square = GameController.Instance.squares[position.GetNotation()];
         GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;
         Position = position;
+        onMoved.Invoke();
     }
 
     private bool CanMoveTo(Position position)

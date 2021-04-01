@@ -5,10 +5,24 @@ using UnityEngine;
 
 public class SpawnPieces : MonoBehaviour
 {
+    public static SpawnPieces Instance;
+    
     public GameObject board;
     public GameObject[] pieces;
     
     private bool isWhiteDown;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("Multiple instance of SpawnPieces, ignoring this one", this);
+        }
+    }
 
     void Start()
     {
@@ -56,7 +70,7 @@ public class SpawnPieces : MonoBehaviour
         CreatePieceAtCoord(Piece.PieceType.King, !isWhiteDown, kingFile, 7);
     }
 
-    void CreatePieceAtCoord(Piece.PieceType type, bool isWhite, int file, int rank)
+    public void CreatePieceAtCoord(Piece.PieceType type, bool isWhite, int file, int rank)
     {
         GameObject piece = GetPieceFromType(type, isWhite);
         GameObject createdPiece = Instantiate(piece, transform);
