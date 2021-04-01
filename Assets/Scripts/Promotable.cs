@@ -16,7 +16,9 @@ public class Promotable : MonoBehaviour
         bool isWhite = piece.isWhite;
         int file = piece.Position.GetFile();
         int rank = piece.Position.GetRank();
-        if (isWhite && rank == 7 || !isWhite && rank == 0)
+
+        bool promoteUp = isWhite == GameController.Instance.isWhiteDown;
+        if (promoteUp && rank == 7 || !promoteUp && rank == 0)
         {
             // TODO: be able to promote to anything except pawn
             SpawnPieces.Instance.CreatePieceAtCoord(Piece.PieceType.Queen, isWhite, file, rank);
