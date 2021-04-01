@@ -37,6 +37,7 @@ public class Piece : MonoBehaviour
         else if (CanAttackAt(position))
         {
             Piece other = GameController.Instance.GetPieceAtPosition(position);
+            GameController.Instance.pieces.Remove(other);
             Destroy(other.gameObject);
             UpdatePosition(position);
         }
@@ -72,5 +73,11 @@ public class Piece : MonoBehaviour
         }
 
         return false;
+    }
+
+    public override string ToString()
+    {
+        string color = isWhite ? "White" : "Black";
+        return color + " " + type.ToString() + " " + Position;
     }
 }

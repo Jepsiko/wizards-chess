@@ -29,7 +29,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         previousPosition = rectTransform.anchoredPosition;
         transform.SetSiblingIndex(-1);
         
-        GameController.Instance.GenerateMoves(eventData.pointerDrag.GetComponent<Piece>());
+        GameController.Instance.GenerateMoves(GetComponent<Piece>());
         
         GetComponent<HighlightSquares>().HighlightAllSquares();
     }

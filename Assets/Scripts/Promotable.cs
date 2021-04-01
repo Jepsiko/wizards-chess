@@ -17,12 +17,11 @@ public class Promotable : MonoBehaviour
         int file = piece.Position.GetFile();
         int rank = piece.Position.GetRank();
 
-        bool promoteUp = isWhite == GameController.Instance.isWhiteDown;
-        if (promoteUp && rank == 7 || !promoteUp && rank == 0)
-        {
-            // TODO: be able to promote to anything except pawn
-            SpawnPieces.Instance.CreatePieceAtCoord(Piece.PieceType.Queen, isWhite, file, rank);
-            Destroy(gameObject);
-        }
+        int promotionRank = isWhite == GameController.Instance.isWhiteDown ? 7 : 0;
+        if (rank != promotionRank) return;
+        
+        // TODO: be able to promote to anything except pawn
+        SpawnPieces.Instance.CreatePieceAtCoord(Piece.PieceType.Queen, isWhite, file, rank);
+        Destroy(gameObject);
     }
 }

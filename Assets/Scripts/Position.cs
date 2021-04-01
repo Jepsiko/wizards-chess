@@ -41,14 +41,14 @@ public class Position
         return position;
     }
 
-    public void ChangePosition(int newFile, int newRank)
+    private void ChangePosition(int newFile, int newRank)
     {
         file = newFile;
         rank = newRank;
         notation = BoardNotation.SquareNameFromCoordinate(file, rank);
     }
 
-    public void ChangePosition(string newNotation)
+    private void ChangePosition(string newNotation)
     {
         notation = newNotation;
         int[] coord = BoardNotation.CoordinateFromSquareName(notation);
@@ -69,5 +69,10 @@ public class Position
     public int GetRank()
     {
         return rank;
+    }
+
+    public override string ToString()
+    {
+        return notation + " (" + file + "," + rank + ")";
     }
 }

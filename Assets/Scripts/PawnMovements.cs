@@ -1,31 +1,49 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PawnMovements : Movable
 {
+
+    private void GenerateAttackMoves()
+    {
+        Position position = GetComponent<Piece>().Position;
+
+        bool directionUp = GetComponent<Piece>().isWhite == GameController.Instance.isWhiteDown;
+        int direction = directionUp ? 1 : -1;
+
+        Position left = position.GetPositionFromHere(-1, +1 * direction);
+        Position right = position.GetPositionFromHere(+1, +1 * direction);
+
+        if (IsEnemyThere(left))
+            AttackMoves.Add(left);
+        if (IsEnemyThere(right))
+            AttackMoves.Add(right);
+    }
+
+    private bool IsEnemyThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        print(piece);
+        return piece != null && piece.isWhite != GetComponent<Piece>().isWhite;
+    }
+
     public override void GeneratePossibleMoves()
     {
         PossibleMoves = new List<Position>();
-        bool isWhite = GetComponent<Piece>().isWhite;
 
         Position position = GetComponent<Piece>().Position;
-        bool isWhiteDown = GameController.Instance.isWhiteDown;
-        
-        int file = position.GetFile();
         int rank = position.GetRank();
 
-        if (isWhite == isWhiteDown)
-        {
-            PossibleMoves.Add(Position.GetPositionAt(file, rank+1));
-            if (rank == 1)
-                PossibleMoves.Add(Position.GetPositionAt(file, rank+2));
-        }
-        else
-        {
-            PossibleMoves.Add(Position.GetPositionAt(file, rank-1));
-            if (rank == 6)
-                PossibleMoves.Add(Position.GetPositionAt(file, rank-2));
-        }
+        bool directionUp = GetComponent<Piece>().isWhite == GameController.Instance.isWhiteDown;
+        int direction = directionUp ? 1 : -1;
+        int startingRank = directionUp ? 1 : 6;
+        
+        PossibleMoves.Add(position.GetPositionFromHere(0, +1*direction));
+        if (rank == startingRank)
+            PossibleMoves.Add(position.GetPositionFromHere(0, +2*direction));
+
+        GenerateAttackMoves();
     }
 }

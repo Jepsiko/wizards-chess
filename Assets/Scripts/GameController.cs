@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     
     public bool isWhiteDown;
+
+    public UnityEvent onMovesGenerated;
     
     [HideInInspector]
     public List<Piece> pieces = new List<Piece>();
@@ -41,9 +44,9 @@ public class GameController : MonoBehaviour
     public void GenerateMoves(Piece piece)
     {
         Movable movable = piece.GetComponent<Movable>();
-        movable.GeneratePossibleMoves();
         movable.LegalMoves = new List<Position>();
         movable.AttackMoves = new List<Position>();
+        movable.GeneratePossibleMoves();
 
         foreach (Position possibleMove in movable.PossibleMoves)
         {
@@ -53,5 +56,7 @@ public class GameController : MonoBehaviour
             else if (piece.isWhite != other.isWhite)
                 movable.AttackMoves.Add(possibleMove);
         }
+        
+        onMovesGenerated.Invoke();
     }
 }
