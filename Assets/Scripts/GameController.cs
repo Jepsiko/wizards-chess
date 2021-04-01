@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     
     public bool isWhiteDown;
     public List<Piece> pieces = new List<Piece>();
-    public Hashtable squares = new Hashtable();
+    public Dictionary<string, Square> squares = new Dictionary<string, Square>();
     
     void Awake()
     {
@@ -22,19 +22,34 @@ public class GameController : MonoBehaviour
         }
     }
     
-    public bool IsOccupied(string position)
+    public bool IsOccupied(Position position)
     {
-        bool isOccupied = false;
+        return GetPieceAtPosition(position) != null;
+    }
 
+    public Piece GetPieceAtPosition(Position position)
+    {
         foreach (Piece piece in pieces)
-        {
-            if (piece.position == position)
-            {
-                isOccupied = true;
-                break;
-            }
-        }
+            if (piece.Position.Equals(position))
+                return piece;
 
-        return isOccupied;
+        return null;
+    }
+    
+    public void GenerateMoves(Piece piece)
+    {
+        Movable movable = piece.GetComponent<Movable>();
+        movable.GeneratePossibleMoves();
+        movable.LegalMoves = new List<Position>();
+        movable.AttackMoves = new List<Position>();
+
+        foreach (Position possibleMove in movable.PossibleMoves)
+        {
+            Piece other = GetPieceAtPosition(possibleMove);
+            if (other == null)
+                movable.LegalMoves.Add(possibleMove);
+            else if (piece.isWhite != other.isWhite)
+                movable.AttackMoves.Add(possibleMove);
+        }
     }
 }

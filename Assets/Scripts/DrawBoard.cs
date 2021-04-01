@@ -14,37 +14,38 @@ public class DrawBoard : MonoBehaviour
         {
             for (int rank = 0; rank < 8; rank++)
             {
-                GameObject square = CreateSquare(file, rank);
-                square.name = BoardNotation.SquareNameFromCoordinate(file, rank);
-                square.AddComponent<Square>().position = square.name;
-                GameController.Instance.squares.Add(square.name, square.GetComponent<Square>());
+                Square square = CreateSquare(file, rank);
+                GameController.Instance.squares.Add(square.Position.GetNotation(), square);
             }
         }
     }
 
     private void Update()
     {
-        foreach (DictionaryEntry squareEntry in GameController.Instance.squares)
+        foreach (Square square in GameController.Instance.squares.Values)
         {
-            Square square = (Square) squareEntry.Value;
             if (square.isLegal)
-                square.ChangeColor(GetLegalSquareColor(square.position));
+                square.ChangeColor(GetLegalSquareColor(square.Position));
             else
-                square.ChangeColor(GetSquareColor(square.position));
+                square.ChangeColor(GetSquareColor(square.Position));
         }
     }
 
-    private GameObject CreateSquare(int file, int rank)
+    private Square CreateSquare(int file, int rank)
     {
-        GameObject square = new GameObject();
+        GameObject squareObject = new GameObject();
         
-        RectTransform rectTransform = square.AddComponent<RectTransform>();
+        RectTransform rectTransform = squareObject.AddComponent<RectTransform>();
         rectTransform.SetParent(transform);
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
         rectTransform.anchoredPosition = GetPosition(file, rank);
 
-        square.AddComponent<Image>();
+        squareObject.AddComponent<Image>();
+        
+        Square square = squareObject.AddComponent<Square>();
+        square.Position = Position.GetPositionAt(file, rank);
+        squareObject.name = square.Position.GetNotation();
 
         return square;
     }
@@ -54,12 +55,9 @@ public class DrawBoard : MonoBehaviour
         return new Vector3((-3.50f + file)*size, (-3.50f + rank)*size);
     }
 
-    private Color GetSquareColor(string position)
+    private Color GetSquareColor(Position position)
     {
-        int[] coord = BoardNotation.CoordinateFromSquareName(position);
-        int file = coord[0];
-        int rank = coord[1];
-        return GetSquareColor(file, rank);
+        return GetSquareColor(position.GetFile(), position.GetRank());
     }
 
     private Color GetSquareColor(int file, int rank)
@@ -67,12 +65,9 @@ public class DrawBoard : MonoBehaviour
         return (file + rank) % 2 == 0 ? GameSettings.Instance.blackColor : GameSettings.Instance.whiteColor;
     }
 
-    private Color GetLegalSquareColor(string position)
+    private Color GetLegalSquareColor(Position position)
     {
-        int[] coord = BoardNotation.CoordinateFromSquareName(position);
-        int file = coord[0];
-        int rank = coord[1];
-        return GetLegalSquareColor(file, rank);
+        return GetLegalSquareColor(position.GetFile(), position.GetRank());
     }
 
     private Color GetLegalSquareColor(int file, int rank)

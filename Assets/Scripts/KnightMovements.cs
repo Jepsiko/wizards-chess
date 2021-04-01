@@ -2,37 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightMovements : MonoBehaviour, IMovable
+public class KnightMovements : Movable
 {
-    public List<string> GetPossibleMoves()
+    public override void GeneratePossibleMoves()
     {
-        List<string> possibleMoves = new List<string>();
+        PossibleMoves = new List<Position>();
 
-        string position = GetComponent<Piece>().position;
+        Position position = GetComponent<Piece>().Position;
 
         for (int i = -2; i <= 2; i++)
             for (int j = -2; j <= 2; j++)
                 if (i != 0 && j != 0 && i != j && i != -j)
                 {
-                    string nextPosition = BoardNotation.MoveFileAndRank(position, i, j);
+                    Position nextPosition = position.GetPositionFromHere(i, j);
                     if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition)) 
-                        possibleMoves.Add(nextPosition);
+                        PossibleMoves.Add(nextPosition);
                 }
-
-        return possibleMoves;
-    }
-
-    public List<string> GetLegalMoves()
-    {
-        List<string> possibleMoves = GetPossibleMoves();
-        List<string> legalMoves = new List<string>();
-
-        foreach (string possibleMove in possibleMoves)
-        {
-            if (!GameController.Instance.IsOccupied(possibleMove))
-                legalMoves.Add(possibleMove);
-        }
-        
-        return legalMoves;
     }
 }

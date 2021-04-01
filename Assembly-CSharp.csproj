@@ -65,11 +65,12 @@
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameSettings.cs" />
      <Compile Include="Assets\Scripts\HighlightSquares.cs" />
-     <Compile Include="Assets\Scripts\IMovable.cs" />
      <Compile Include="Assets\Scripts\KingMovements.cs" />
      <Compile Include="Assets\Scripts\KnightMovements.cs" />
+     <Compile Include="Assets\Scripts\Movable.cs" />
      <Compile Include="Assets\Scripts\PawnMovements.cs" />
      <Compile Include="Assets\Scripts\Piece.cs" />
+     <Compile Include="Assets\Scripts\Position.cs" />
      <Compile Include="Assets\Scripts\QueenMovements.cs" />
      <Compile Include="Assets\Scripts\RookMovements.cs" />
      <Compile Include="Assets\Scripts\SpawnPieces.cs" />

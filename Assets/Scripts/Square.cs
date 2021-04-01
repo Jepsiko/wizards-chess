@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Square : MonoBehaviour
 {
-    public string position;
+    public Position Position;
     public Color color;
     public bool isLegal = false;
 

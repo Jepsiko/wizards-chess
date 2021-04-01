@@ -29,19 +29,4 @@ public static class BoardNotation
         coord[1] = 7 - RankNames.IndexOf(rank);
         return coord;
     }
-
-    public static string MoveFileAndRank(string previous, int fileOffset, int rankOffset)
-    {
-        int fileIndex = FileNames.IndexOf(previous[0]);
-        int rankIndex = RankNames.IndexOf(previous[1]);
-
-        if (fileIndex + fileOffset < 0 || fileIndex + fileOffset >= 8)
-            return null;
-        if (rankIndex + rankOffset < 0 || rankIndex + rankOffset >= 8)
-            return null;
-
-        char newFile = FileNames[fileIndex + fileOffset];
-        char newRank = RankNames[rankIndex + rankOffset];
-        return newFile + "" + newRank;
-    }
 }

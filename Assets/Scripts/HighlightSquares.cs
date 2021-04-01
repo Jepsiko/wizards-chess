@@ -15,9 +15,10 @@ public class HighlightSquares : MonoBehaviour
 
     public void HighlightLegalSquares()
     {
-        foreach (string squarePosition in GetComponent<IMovable>().GetLegalMoves())
+        GetComponent<Movable>().LegalMoves.ForEach(print);
+        foreach (Position squarePosition in GetComponent<Movable>().LegalMoves)
         {
-            Square square = (Square) GameController.Instance.squares[squarePosition];
+            Square square = GameController.Instance.squares[squarePosition.GetNotation()];
             square.isLegal = true;
             highlightedSquares.Add(square);
         }

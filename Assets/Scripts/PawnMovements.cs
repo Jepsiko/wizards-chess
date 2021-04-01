@@ -2,47 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PawnMovements : MonoBehaviour, IMovable
+public class PawnMovements : Movable
 {
-    public List<string> GetPossibleMoves()
+    public override void GeneratePossibleMoves()
     {
-        List<string> possibleMoves = new List<string>();
+        PossibleMoves = new List<Position>();
         bool isWhite = GetComponent<Piece>().isWhite;
 
-        string position = GetComponent<Piece>().position;
+        Position position = GetComponent<Piece>().Position;
         bool isWhiteDown = GameController.Instance.isWhiteDown;
         
-        int[] coord = BoardNotation.CoordinateFromSquareName(position);
-        int file = coord[0];
-        int rank = coord[1];
+        int file = position.GetFile();
+        int rank = position.GetRank();
 
         if (isWhite == isWhiteDown)
         {
-            possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank+1));
+            PossibleMoves.Add(Position.GetPositionAt(file, rank+1));
             if (rank == 1)
-                possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank+2));
+                PossibleMoves.Add(Position.GetPositionAt(file, rank+2));
         }
         else
         {
-            possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank-1));
+            PossibleMoves.Add(Position.GetPositionAt(file, rank-1));
             if (rank == 6)
-                possibleMoves.Add(BoardNotation.SquareNameFromCoordinate(file, rank-2));
+                PossibleMoves.Add(Position.GetPositionAt(file, rank-2));
         }
-
-        return possibleMoves;
-    }
-
-    public List<string> GetLegalMoves()
-    {
-        List<string> possibleMoves = GetPossibleMoves();
-        List<string> legalMoves = new List<string>();
-
-        foreach (string possibleMove in possibleMoves)
-        {
-            if (!GameController.Instance.IsOccupied(possibleMove))
-                legalMoves.Add(possibleMove);
-        }
-        
-        return legalMoves;
     }
 }

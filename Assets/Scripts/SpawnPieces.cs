@@ -66,7 +66,7 @@ public class SpawnPieces : MonoBehaviour
         Transform square = board.transform.Find(BoardNotation.SquareNameFromCoordinate(file, rank));
         createdPiece.GetComponent<RectTransform>().anchoredPosition =
             square.GetComponent<RectTransform>().anchoredPosition;
-        createdPiece.GetComponent<Piece>().position = square.name;
+        createdPiece.GetComponent<Piece>().Position = Position.GetPositionAt(square.name);
         
         GameController.Instance.pieces.Add(createdPiece.GetComponent<Piece>());
     }

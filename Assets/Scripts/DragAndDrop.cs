@@ -28,6 +28,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.blocksRaycasts = false;
         previousPosition = rectTransform.anchoredPosition;
         transform.SetSiblingIndex(-1);
+        
+        GameController.Instance.GenerateMoves(eventData.pointerDrag.GetComponent<Piece>());
         GetComponent<HighlightSquares>().HighlightLegalSquares();
     }
 
@@ -39,11 +41,15 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             ResetPosition();
         else
         {
-            string targetPosition;
+            Position targetPosition;
             if (eventData.pointerEnter.GetComponent<Piece>() != null)
-                targetPosition = eventData.pointerEnter.GetComponent<Piece>().position;
+                targetPosition = eventData.pointerEnter.GetComponent<Piece>().Position;
             else
-                targetPosition = eventData.pointerEnter.name;
+            {
+                print("EndDrag on square");
+                print(eventData.pointerEnter.name);
+                targetPosition = Position.GetPositionAt(eventData.pointerEnter.name);
+            }
 
             GetComponent<Piece>().MoveToPosition(targetPosition);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    public string position;
+    public Position Position;
 
     public enum PieceType
     {
@@ -19,22 +19,33 @@ public class Piece : MonoBehaviour
     public PieceType type;
     public bool isWhite;
 
-    public void MoveToPosition(string newPosition)
+    public void MoveToPosition(Position newPosition)
     {
-        if (newPosition == position)
+        if (newPosition == Position)
         {
             GetComponent<DragAndDrop>().ResetPosition();
             return;
         }
         
-        List<string> legalMoves = GetComponent<IMovable>().GetLegalMoves();
-        if (legalMoves.Contains(newPosition))
+        if (CanMoveTo(newPosition))
         {
-            Square square = (Square) GameController.Instance.squares[newPosition];
+            Square square = GameController.Instance.squares[newPosition.GetNotation()];
+            Debug.Log("Square " + square.name + ", " + square.Position.GetNotation(), square);
             GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;
-            position = newPosition;
+            Position = newPosition;
         }
         else
             GetComponent<DragAndDrop>().ResetPosition();
+    }
+
+    private bool CanMoveTo(Position newPosition)
+    {
+        foreach (Position legalMove in GetComponent<Movable>().LegalMoves)
+        {
+            if (newPosition.Equals(legalMove))
+                return true;
+        }
+
+        return false;
     }
 }
