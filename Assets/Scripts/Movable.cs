@@ -7,7 +7,14 @@ public abstract class Movable : MonoBehaviour
     public List<Position> PossibleMoves;
     public List<Position> LegalMoves;
     public List<Position> AttackMoves;
-    
+
+    public void ResetMoves()
+    {
+        PossibleMoves = new List<Position>();
+        LegalMoves = new List<Position>();
+        AttackMoves = new List<Position>();
+    }
+
     public abstract void GeneratePossibleMoves();
 
     protected void AddAlongLine(int fileOffset, int rankOffset)

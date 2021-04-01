@@ -6,17 +6,15 @@ public class KingMovements : Movable
 {
     public override void GeneratePossibleMoves()
     {
-        PossibleMoves = new List<Position>();
-        
         Position position = GetComponent<Piece>().Position;
 
         for (int i = -1; i <= 1; i++)
-        for (int j = -1; j <= 1; j++)
-            if (i != 0 || j != 0)
-            {
-                Position nextPosition = position.GetPositionFromHere(i, j);
-                if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition))
-                    PossibleMoves.Add(nextPosition);
-            }
+            for (int j = -1; j <= 1; j++)
+                if (i != 0 || j != 0)
+                {
+                    Position nextPosition = position.GetPositionFromHere(i, j);
+                    if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition))
+                        PossibleMoves.Add(nextPosition);
+                }
     }
 }

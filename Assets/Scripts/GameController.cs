@@ -44,8 +44,7 @@ public class GameController : MonoBehaviour
     public void GenerateMoves(Piece piece)
     {
         Movable movable = piece.GetComponent<Movable>();
-        movable.LegalMoves = new List<Position>();
-        movable.AttackMoves = new List<Position>();
+        movable.ResetMoves();
         movable.GeneratePossibleMoves();
 
         foreach (Position possibleMove in movable.PossibleMoves)

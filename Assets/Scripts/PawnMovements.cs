@@ -31,8 +31,6 @@ public class PawnMovements : Movable
 
     public override void GeneratePossibleMoves()
     {
-        PossibleMoves = new List<Position>();
-
         Position position = GetComponent<Piece>().Position;
         int rank = position.GetRank();
 

@@ -8,8 +8,8 @@ public class Square : MonoBehaviour
 {
     public Position Position;
     public Color color;
-    public bool isLegal = false;
-    public bool isAttacked = false;
+    public bool isLegal;
+    public bool isAttacked;
 
     private Image image;
 

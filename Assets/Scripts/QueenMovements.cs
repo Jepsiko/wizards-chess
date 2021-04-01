@@ -6,8 +6,6 @@ public class QueenMovements : Movable
 {
     public override void GeneratePossibleMoves()
     {
-        PossibleMoves = new List<Position>();
-        
         AddAlongLine(-1, 0);
         AddAlongLine(0, -1);
         AddAlongLine(+1, 0);

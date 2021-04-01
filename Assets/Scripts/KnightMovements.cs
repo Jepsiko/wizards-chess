@@ -6,8 +6,6 @@ public class KnightMovements : Movable
 {
     public override void GeneratePossibleMoves()
     {
-        PossibleMoves = new List<Position>();
-
         Position position = GetComponent<Piece>().Position;
 
         for (int i = -2; i <= 2; i++)
