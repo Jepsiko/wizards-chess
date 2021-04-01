@@ -11,19 +11,13 @@ public class KingMovements : MonoBehaviour, IMovable
         string position = GetComponent<Piece>().position;
 
         for (int i = -1; i <= 1; i++)
-        {
             for (int j = -1; j <= 1; j++)
-            {
                 if (i != 0 || j != 0)
                 {
                     string nextPosition = BoardNotation.MoveFileAndRank(position, i, j);
                     if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition))
-                    {
                         possibleMoves.Add(nextPosition);
-                    }
                 }
-            }
-        }
 
         return possibleMoves;
     }
