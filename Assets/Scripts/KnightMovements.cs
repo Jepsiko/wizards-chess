@@ -14,7 +14,6 @@ public class KnightMovements : MonoBehaviour, IMovable
             for (int j = -2; j <= 2; j++)
                 if (i != 0 && j != 0 && i != j && i != -j)
                 {
-                    Debug.Log("i : " + i + ", j :" + j);
                     string nextPosition = BoardNotation.MoveFileAndRank(position, i, j);
                     if (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition)) 
                         possibleMoves.Add(nextPosition);
