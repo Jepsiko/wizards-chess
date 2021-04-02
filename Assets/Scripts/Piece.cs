@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,6 +38,11 @@ public class Piece : MonoBehaviour
         else if (CanAttackAt(position))
         {
             Piece other = GameController.Instance.GetPieceAtPosition(position);
+            if (other == null) // En passant case
+            {
+                int direction = isWhite == GameController.Instance.isWhiteDown ? -1 : 1;
+                other = GameController.Instance.GetPieceAtPosition(position.GetPositionFromHere(0, direction));
+            }
             GameController.Instance.pieces.Remove(other);
             Destroy(other.gameObject);
             UpdatePosition(position);
@@ -47,10 +53,29 @@ public class Piece : MonoBehaviour
 
     private void UpdatePosition(Position position)
     {
+        if (HasPawnMovedTwoSquares(position, out int direction))
+        {
+            Position enPassantPosition = Position.GetPositionFromHere(0, direction);
+            GameController.Instance.enPassant = GameController.Instance.squares[enPassantPosition.GetNotation()];
+        }
+        else
+        {
+            GameController.Instance.enPassant = null;
+        }
+        
         Square square = GameController.Instance.squares[position.GetNotation()];
         GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;
         Position = position;
         onMoved.Invoke();
+        
+        GetComponent<Movable>().ResetMoves();
+        GameController.Instance.isWhiteTurn = !GameController.Instance.isWhiteTurn;
+    }
+
+    private bool HasPawnMovedTwoSquares(Position position, out int direction)
+    {
+        direction = isWhite == GameController.Instance.isWhiteDown ? 1 : -1;
+        return type == PieceType.Pawn && position.Equals(Position.GetPositionFromHere(0, 2*direction));
     }
 
     private bool CanMoveTo(Position position)

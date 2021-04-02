@@ -9,12 +9,18 @@ public class GameController : MonoBehaviour
     
     public bool isWhiteDown;
 
+    [HideInInspector]
+    public bool isWhiteTurn = true;
+
+    [HideInInspector]
     public UnityEvent onMovesGenerated;
     
     [HideInInspector]
     public List<Piece> pieces = new List<Piece>();
     public Dictionary<string, Square> squares = new Dictionary<string, Square>();
-    
+    [HideInInspector]
+    public Square enPassant;
+
     void Awake()
     {
         if (Instance == null)
@@ -43,6 +49,9 @@ public class GameController : MonoBehaviour
     
     public void GenerateMoves(Piece piece)
     {
+        if (piece.isWhite != isWhiteTurn)
+            return;
+        
         Movable movable = piece.GetComponent<Movable>();
         movable.ResetMoves();
         movable.GeneratePossibleMoves();
@@ -55,7 +64,7 @@ public class GameController : MonoBehaviour
             else if (piece.isWhite != other.isWhite)
                 movable.AttackMoves.Add(possibleMove);
         }
-        
+
         onMovesGenerated.Invoke();
     }
 }

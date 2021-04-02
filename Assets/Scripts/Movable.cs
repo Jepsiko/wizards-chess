@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,11 @@ public abstract class Movable : MonoBehaviour
     public List<Position> PossibleMoves;
     public List<Position> LegalMoves;
     public List<Position> AttackMoves;
+
+    private void Start()
+    {
+        ResetMoves();
+    }
 
     public void ResetMoves()
     {
