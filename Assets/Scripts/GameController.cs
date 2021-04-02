@@ -49,11 +49,12 @@ public class GameController : MonoBehaviour
     
     public void GenerateMoves(Piece piece)
     {
+        Movable movable = piece.GetComponent<Movable>();
+        movable.ResetMoves();
+        
         if (piece.isWhite != isWhiteTurn)
             return;
         
-        Movable movable = piece.GetComponent<Movable>();
-        movable.ResetMoves();
         movable.GeneratePossibleMoves();
 
         foreach (Position possibleMove in movable.PossibleMoves)

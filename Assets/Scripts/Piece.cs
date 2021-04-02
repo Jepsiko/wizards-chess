@@ -68,7 +68,6 @@ public class Piece : MonoBehaviour
         Position = position;
         onMoved.Invoke();
         
-        GetComponent<Movable>().ResetMoves();
         GameController.Instance.isWhiteTurn = !GameController.Instance.isWhiteTurn;
     }
 
