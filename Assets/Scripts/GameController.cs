@@ -46,26 +46,4 @@ public class GameController : MonoBehaviour
 
         return null;
     }
-    
-    public void GenerateMoves(Piece piece)
-    {
-        Movable movable = piece.GetComponent<Movable>();
-        movable.ResetMoves();
-        
-        if (piece.isWhite != isWhiteTurn)
-            return;
-        
-        movable.GeneratePossibleMoves();
-
-        foreach (Position possibleMove in movable.PossibleMoves)
-        {
-            Piece other = GetPieceAtPosition(possibleMove);
-            if (other == null)
-                movable.LegalMoves.Add(possibleMove);
-            else if (piece.isWhite != other.isWhite)
-                movable.AttackMoves.Add(possibleMove);
-        }
-
-        onMovesGenerated.Invoke();
-    }
 }

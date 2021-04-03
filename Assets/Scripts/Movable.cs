@@ -22,6 +22,28 @@ public abstract class Movable : MonoBehaviour
     }
 
     public abstract void GeneratePossibleMoves();
+    
+    public void GenerateMoves()
+    {
+        Piece piece = GetComponent<Piece>();
+        ResetMoves();
+        
+        if (piece.isWhite != GameController.Instance.isWhiteTurn)
+            return;
+        
+        GeneratePossibleMoves();
+
+        foreach (Position possibleMove in PossibleMoves)
+        {
+            Piece other = GameController.Instance.GetPieceAtPosition(possibleMove);
+            if (other == null)
+                LegalMoves.Add(possibleMove);
+            else if (piece.isWhite != other.isWhite)
+                AttackMoves.Add(possibleMove);
+        }
+
+        GameController.Instance.onMovesGenerated.Invoke();
+    }
 
     protected void AddAlongLine(int fileOffset, int rankOffset)
     {
