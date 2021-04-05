@@ -19,17 +19,36 @@ public class Checkable : MonoBehaviour
 
     private void CheckForChecking()
     {
-        isChecked = IsCheckedByPawn() || IsCheckedByKnight() || IsCheckedByRookOrQueen() || IsCheckedByBishopOrQueen();
-        if (isChecked) onChecked.Invoke();
+        isChecked = IsCheckedByPawn(piece.Position) || 
+                    IsCheckedByKnight(piece.Position) || 
+                    IsCheckedByRookOrQueen(piece.Position) || 
+                    IsCheckedByBishopOrQueen(piece.Position) ||
+                    IsCheckedByKing(piece.Position);
+        
+        // if (isChecked) onChecked.Invoke();
     }
 
-    private bool IsCheckedByKnight()
+    private bool IsCheckedByKing(Position position)
+    {
+        for (int i = -1; i <= 1; i++)
+            for (int j = -1; j <= 1; j++)
+                if (i != 0 || j != 0)
+                {
+                    Position nextPosition = position.GetPositionFromHere(i, j);
+                    if (piece.IsEnemyKingThere(nextPosition))
+                        return true;
+                }
+
+        return false;
+    }
+
+    private bool IsCheckedByKnight(Position position)
     {
         for (int i = -2; i <= 2; i++)
             for (int j = -2; j <= 2; j++)
                 if (i != 0 && j != 0 && i != j && i != -j)
                 {
-                    Position knightPosition = piece.Position.GetPositionFromHere(i, j);
+                    Position knightPosition = position.GetPositionFromHere(i, j);
                     if (piece.IsEnemyKnightThere(knightPosition))
                         return true;
                 }
@@ -37,36 +56,36 @@ public class Checkable : MonoBehaviour
         return false;
     }
 
-    private bool IsCheckedByPawn()
+    private bool IsCheckedByPawn(Position position)
     {
         bool isDown = piece.isWhite == GameController.Instance.isWhiteDown;
         int direction = isDown ? 1 : -1;
 
-        Position left = piece.Position.GetPositionFromHere(-1, +1 * direction);
-        Position right = piece.Position.GetPositionFromHere(+1, +1 * direction);
+        Position left = position.GetPositionFromHere(-1, +1 * direction);
+        Position right = position.GetPositionFromHere(+1, +1 * direction);
 
         return piece.IsEnemyPawnThere(left) || piece.IsEnemyPawnThere(right);
     }
 
-    private bool IsCheckedByRookOrQueen()
+    private bool IsCheckedByRookOrQueen(Position position)
     {
-        return CheckAlongLine(Piece.PieceType.Rook, -1, 0) || 
-               CheckAlongLine(Piece.PieceType.Rook, 0, -1) || 
-               CheckAlongLine(Piece.PieceType.Rook, +1, 0) || 
-               CheckAlongLine(Piece.PieceType.Rook, 0, +1);
+        return CheckAlongLine(position, Piece.PieceType.Rook, -1, 0) || 
+               CheckAlongLine(position, Piece.PieceType.Rook, 0, -1) || 
+               CheckAlongLine(position, Piece.PieceType.Rook, +1, 0) || 
+               CheckAlongLine(position, Piece.PieceType.Rook, 0, +1);
     }
 
-    private bool IsCheckedByBishopOrQueen()
+    private bool IsCheckedByBishopOrQueen(Position position)
     {
-        return CheckAlongLine(Piece.PieceType.Bishop, -1, -1) || 
-               CheckAlongLine(Piece.PieceType.Bishop, -1, +1) || 
-               CheckAlongLine(Piece.PieceType.Bishop, +1, -1) || 
-               CheckAlongLine(Piece.PieceType.Bishop, +1, +1);
+        return CheckAlongLine(position, Piece.PieceType.Bishop, -1, -1) || 
+               CheckAlongLine(position, Piece.PieceType.Bishop, -1, +1) || 
+               CheckAlongLine(position, Piece.PieceType.Bishop, +1, -1) || 
+               CheckAlongLine(position, Piece.PieceType.Bishop, +1, +1);
     }
 
-    private bool CheckAlongLine(Piece.PieceType type, int fileOffset, int rankOffset)
+    private bool CheckAlongLine(Position position, Piece.PieceType type, int fileOffset, int rankOffset)
     {
-        Position nextPosition = piece.Position.GetPositionFromHere(fileOffset, rankOffset);
+        Position nextPosition = position.GetPositionFromHere(fileOffset, rankOffset);
         while (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition))
         {
             nextPosition = nextPosition.GetPositionFromHere(fileOffset, rankOffset);

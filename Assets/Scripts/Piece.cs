@@ -116,32 +116,32 @@ public class Piece : MonoBehaviour
 
     public bool IsEnemyPawnThere(Position position)
     {
-        Piece piece = GameController.Instance.GetPieceAtPosition(position);
-        return piece != null && piece.type == PieceType.Pawn && IsEnemy(piece);
+        return IsEnemyOfTypeHere(PieceType.Pawn, position);
     }
 
     public bool IsEnemyKnightThere(Position position)
     {
-        Piece piece = GameController.Instance.GetPieceAtPosition(position);
-        return piece != null && piece.type == PieceType.Knight && IsEnemy(piece);
+        return IsEnemyOfTypeHere(PieceType.Knight, position);
     }
 
     public bool IsEnemyBishopThere(Position position)
     {
-        Piece piece = GameController.Instance.GetPieceAtPosition(position);
-        return piece != null && piece.type == PieceType.Bishop && IsEnemy(piece);
+        return IsEnemyOfTypeHere(PieceType.Bishop, position);
     }
 
     public bool IsEnemyRookThere(Position position)
     {
-        Piece piece = GameController.Instance.GetPieceAtPosition(position);
-        return piece != null && piece.type == PieceType.Rook && IsEnemy(piece);
+        return IsEnemyOfTypeHere(PieceType.Rook, position);
     }
 
     public bool IsEnemyQueenThere(Position position)
     {
-        Piece piece = GameController.Instance.GetPieceAtPosition(position);
-        return piece != null && piece.type == PieceType.Queen && IsEnemy(piece);
+        return IsEnemyOfTypeHere(PieceType.Queen, position);
+    }
+
+    public bool IsEnemyKingThere(Position position)
+    {
+        return IsEnemyOfTypeHere(PieceType.King, position);
     }
 
     public bool IsEnemyThere(Position position)
