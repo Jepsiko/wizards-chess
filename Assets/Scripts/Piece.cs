@@ -23,6 +23,11 @@ public class Piece : MonoBehaviour
     public PieceType type;
     public bool isWhite;
 
+    private void Start()
+    {
+        onMoved.AddListener(GameController.Instance.NextTurn);
+    }
+
     public void MoveToPosition(Position position)
     {
         if (position == Position)
@@ -51,7 +56,7 @@ public class Piece : MonoBehaviour
             GetComponent<DragAndDrop>().ResetPosition();
     }
 
-    private void UpdatePosition(Position position)
+    private void ChangeEnPassant(Position position)
     {
         if (HasPawnMovedTwoSquares(position, out int direction))
         {
@@ -62,13 +67,17 @@ public class Piece : MonoBehaviour
         {
             GameController.Instance.enPassant = null;
         }
+    }
+
+    private void UpdatePosition(Position position)
+    {
+        ChangeEnPassant(position);
         
         Square square = GameController.Instance.squares[position.GetNotation()];
         GetComponent<RectTransform>().anchoredPosition = square.GetComponent<RectTransform>().anchoredPosition;
         Position = position;
-        onMoved.Invoke();
         
-        GameController.Instance.isWhiteTurn = !GameController.Instance.isWhiteTurn;
+        onMoved.Invoke();
     }
 
     private bool HasPawnMovedTwoSquares(Position position, out int direction)
@@ -97,6 +106,53 @@ public class Piece : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool IsEnemyOfTypeHere(PieceType pieceType, Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && piece.type == pieceType && IsEnemy(piece);
+    }
+
+    public bool IsEnemyPawnThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && piece.type == PieceType.Pawn && IsEnemy(piece);
+    }
+
+    public bool IsEnemyKnightThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && piece.type == PieceType.Knight && IsEnemy(piece);
+    }
+
+    public bool IsEnemyBishopThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && piece.type == PieceType.Bishop && IsEnemy(piece);
+    }
+
+    public bool IsEnemyRookThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && piece.type == PieceType.Rook && IsEnemy(piece);
+    }
+
+    public bool IsEnemyQueenThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && piece.type == PieceType.Queen && IsEnemy(piece);
+    }
+
+    public bool IsEnemyThere(Position position)
+    {
+        Piece piece = GameController.Instance.GetPieceAtPosition(position);
+        return piece != null && IsEnemy(piece);
+    }
+
+    public bool IsEnemy(Piece other)
+    {
+        return isWhite != other.isWhite;
     }
 
     public override string ToString()

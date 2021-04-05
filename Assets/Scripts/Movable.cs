@@ -9,9 +9,12 @@ public abstract class Movable : MonoBehaviour
     public List<Position> LegalMoves;
     public List<Position> AttackMoves;
 
+    protected Piece piece;
+
     private void Start()
     {
         ResetMoves();
+        piece = GetComponent<Piece>();
     }
 
     public void ResetMoves()
@@ -25,7 +28,6 @@ public abstract class Movable : MonoBehaviour
     
     public void GenerateMoves()
     {
-        Piece piece = GetComponent<Piece>();
         ResetMoves();
         
         if (piece.isWhite != GameController.Instance.isWhiteTurn)
@@ -47,8 +49,7 @@ public abstract class Movable : MonoBehaviour
 
     protected void AddAlongLine(int fileOffset, int rankOffset)
     {
-        Position position = GetComponent<Piece>().Position;
-        Position nextPosition = position.GetPositionFromHere(fileOffset, rankOffset);
+        Position nextPosition = piece.Position.GetPositionFromHere(fileOffset, rankOffset);
         while (nextPosition != null && !GameController.Instance.IsOccupied(nextPosition))
         {
             PossibleMoves.Add(nextPosition);

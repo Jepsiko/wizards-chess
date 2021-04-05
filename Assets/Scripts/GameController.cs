@@ -8,12 +8,10 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
     
     public bool isWhiteDown;
-
-    [HideInInspector]
     public bool isWhiteTurn = true;
 
-    [HideInInspector]
     public UnityEvent onMovesGenerated;
+    public UnityEvent onAnyPieceMoved;
     
     [HideInInspector]
     public List<Piece> pieces = new List<Piece>();
@@ -45,5 +43,11 @@ public class GameController : MonoBehaviour
                 return piece;
 
         return null;
+    }
+
+    public void NextTurn()
+    {
+        isWhiteTurn = !isWhiteTurn;
+        onAnyPieceMoved.Invoke();
     }
 }
